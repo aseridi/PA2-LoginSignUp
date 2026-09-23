@@ -34,6 +34,10 @@ app.get("/", (req, res) => {
 app.post("/signup", async (req, res) => {
     try {
         const {f_name, l_name, username, password} = req.body;
+        const existingUser = await users.findOne({username: username});
+        if (existingUser) {
+            return res.status(409).json({message: "username taken, choose a different username."});
+        }
         await users.insertOne({ f_name, l_name, username, password});
         res.status(201).json({message: "User created successfully"});
     } catch (error) {
