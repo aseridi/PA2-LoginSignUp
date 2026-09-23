@@ -33,7 +33,14 @@ app.get("/", (req, res) => {
 //signup route
 app.post("/signup", async (req, res) => {
     try {
-        const {f_name, l_name, username, password} = req.body;
+        const f_name = req.body.f_name?.trim();
+        const l_name = req.body.l_name?.trim();
+        const username = req.body.username?.trim();
+        const password = req.body.password;
+
+        if (!f_name || !l_name || !username || !password) {
+            return res.status(400).json({message: "please make sure to fill all the fields!"})
+        }
         const existingUser = await users.findOne({username: username});
         if (existingUser) {
             return res.status(409).json({message: "username taken, choose a different username."});
