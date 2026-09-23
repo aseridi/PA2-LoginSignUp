@@ -1,0 +1,49 @@
+require("dotenv").config();
+
+const express = require("express");
+const cors = require("cors");
+const {MongoClient } = require("mongodb");
+
+const app = express();
+const client = new MongoClient(process.env.MONGO_URI);
+
+app.use(express.json());
+app.use(cors());
+
+
+let users;
+async function connectDatabase() {
+    try {
+        await client.connect();
+        const db = client.db("pa2");
+        users = db.collection("users");
+        console.log("connected to mongoDB");
+    } catch (error) {
+        console.error("coule not connect to MongoDB");
+        console.error(error);
+    }
+}
+
+
+app.get("/", (req, res) => {
+  res.json({ message: "Server is running" });
+});
+
+
+//signup route
+app.post("/signup", async (req, res) => {
+    try {
+        const {f_name, l_name, username, password} = req.body;
+        await users.insertOne({ f_name, l_name, username, password});
+        res.status(201).json({message: "User created successfully"});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "Server error"});
+    }
+});
+
+
+connectDatabase();
+app.listen(9000, () => {
+  console.log("Server running on port 9000");
+});
