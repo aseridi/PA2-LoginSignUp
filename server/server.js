@@ -53,6 +53,32 @@ app.post("/signup", async (req, res) => {
     }
 });
 
+//login route
+app.post("/login", async (req, res) => {
+    try {
+        const username = req.body.username?.trim();
+        const password = req.body.password;
+
+        if (!username){
+            return res.status(400).json({message: "Please enter your username"});
+        }
+        if(!password){
+            return res.status(400).json({message: "Please enter your password"});
+        }
+
+        const existingUser = await users.findOne({username: username});
+        if (!existingUser){
+            return res.status(401).json({message: "Username does not exist please sign up or use existing username"});
+        }
+        if (existingUser.password !== password) {
+            return res.status(401).json({message: "Wrong password, please try again"});
+        }
+        return res.status(200).json({message: "Login successful"});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "Server error"});
+    }
+});
 
 connectDatabase();
 app.listen(9000, () => {
