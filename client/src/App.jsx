@@ -9,14 +9,13 @@ function App() {
   return (
     <>
       <h1>PA2 — Login and Signup</h1>
-      <button
-        className={`signup-login-btn ${showSignup ? 'active' : ''}`}
-        onClick={() => setShowSignup(!showSignup)}
-        aria-pressed={showSignup}
-      >
-        {showSignup ? 'Go to Login' : 'Go to Sign Up'}
-      </button>
-
+        <button
+          className={`signup-login-btn ${showSignup ? 'active' : ''}`}
+          onClick={() => setShowSignup(!showSignup)}
+          aria-pressed={showSignup}
+        >
+          {showSignup ? 'Go to Login' : 'Go to Sign Up'}
+        </button>
       {showSignup ? <Signup /> : <Login />}
     </>
   );
