@@ -2,6 +2,7 @@ import { useState } from 'react'
 import '../App.css'
 
 function Signup() {
+  
     const [f_name, setFname] = useState("");
     const [l_name, setLname] = useState("");
     const [username, setUsername] = useState("");

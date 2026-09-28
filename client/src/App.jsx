@@ -8,7 +8,9 @@ function App() {
   const [showSignup, setShowSignup] = useState(false);
   return (
     <>
+    <div className="app">
       <h1>PA2 — Login and Signup</h1>
+      <div className="tabs">
         <button
           className={`signup-login-btn ${showSignup ? 'active' : ''}`}
           onClick={() => setShowSignup(!showSignup)}
@@ -16,7 +18,9 @@ function App() {
         >
           {showSignup ? 'Go to Login' : 'Go to Sign Up'}
         </button>
+        </div>
       {showSignup ? <Signup /> : <Login />}
+      </div>
     </>
   );
 }

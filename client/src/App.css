@@ -1,5 +1,4 @@
 .page-main {
-  max-width: 640px;
   margin: 0 auto;
 
 }
@@ -7,9 +6,9 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   background-color: #ffffff;
-  border: 1px solid #0a0a0a2e;
+  border: 2px solid #0a0a0a2e;
   border-radius: 12px;
   padding: 24px;
 }
@@ -29,37 +28,41 @@
   background-color: #e7ebf0;
   border: 1px solid #dde2e8;
   border-radius: 4px;
+  padding: 8px 12px;
 }
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
 .signup-login-btn {
-  width:40%;
   font-size: 1rem;
-  color:#060606;
+  color: #060606;
   border-radius: 12px;
   padding: 8px 16px;
-  margin: 5% 27%;
 }
 
 .message {
   width: 100%;
   font-size: 16px;
   text-align: center;
-  color:#a62323;
+  color:#1b1f24;
   margin: 0 auto;
   padding:16px;
 }
 
 .submit-btn {
+  align-self: center;
   width:40%;
   font-size: 1rem;
   color:#060606;
   border-radius: 12px;
   padding: 8px 16px;
-  margin: auto 27%;
+  margin: auto;
 
 }
 .submit-btn:hover {
-  width: 50%;
   background-color: #b5b5b5;
-  padding: 8px 12px;
-  font-size: 1rem;
 }
