@@ -55,4 +55,14 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get("/users", async (req, res) => {
+    const users = getDb().collection("users");
+    try {
+        const allUsers = await users.find({}, {projection: {f_name: 1, l_name: 1, username:1}}).toArray();
+        res.status(200).json({users: allUsers});    
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "Server error"});
+    }
+});
 module.exports = router;

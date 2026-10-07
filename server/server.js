@@ -9,7 +9,7 @@ app.use(cors());
 
 app.get("/", (req, res) => res.json({ message: "Server is running" }));
 
-app.use("/", require("./routes/auth"));
+app.use("/", require("./routes/users"));
 app.use("/projects", require("./routes/projects"));
 
 connectDatabase();
