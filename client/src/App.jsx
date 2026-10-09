@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Signup from './components/Signup.jsx'
 import Login from './components/Login.jsx'
 import CreateProject from './components/CreateProject.jsx'
+import ProjectList from './components/ProjectList.jsx'
 import './App.css'
 
 function App() {
@@ -34,9 +35,11 @@ function App() {
       <h1>Projects</h1>
       <div className="tabs">
         <button onClick={() => setView("createProject")}>Create Project</button>
+        <button onClick={() => setView("projectList")}>Projects</button>
         <button onClick={() => setLoggedIn(false)}>Logout</button>
       </div>
       {view ==="createProject" && <CreateProject />}
+      {view ==="projectList" && <ProjectList/>}
     </div>
     </>
   )
