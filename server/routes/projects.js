@@ -55,6 +55,7 @@ router.get("/", async (req, res) => {
             name: project.name,
             description: project.description,
             status: project.status,
+            project_lead_id: project.project_lead_id,
             project_lead: userMap.get(project.project_lead_id.toString())?.username ?? "Unknown"
         }));
         res.status(200).json(result);  
