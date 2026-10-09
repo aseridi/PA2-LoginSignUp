@@ -23,6 +23,10 @@ router.post("/", async (req, res) => {
         }
 
         const leadId = new ObjectId(project_lead_id);
+        const existingPname = await projects.findOne({name: name});
+        if (existingPname) {
+            return res.status(400).json({message: "Please use different project name"});
+        }
         const existingUser = await users.findOne({_id: leadId});
         if (!existingUser) {
             return res.status(400).json({message: "Project lead does not exist"});

@@ -1,28 +1,45 @@
 import { useState } from 'react'
 import Signup from './components/Signup.jsx'
 import Login from './components/Login.jsx'
+import CreateProject from './components/CreateProject.jsx'
 import './App.css'
-
 
 function App() {
   const [showSignup, setShowSignup] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [view, setView] = useState("createProject");
+
+  if (!loggedIn) {
+    return (
+      <>
+      <div className="app">
+        <h1>PA3 — Projects</h1>
+        <div className="tabs">
+          <button
+            className={`signup-login-btn ${showSignup ? 'active' : ''}`}
+            onClick={() => setShowSignup(!showSignup)}
+            aria-pressed={showSignup}
+          >
+            {showSignup ? 'Go to Login' : 'Go to Singup'}
+          </button>
+          </div>
+        {showSignup ? <Signup /> : <Login onLogin={() => setLoggedIn(true)} />}
+        </div>
+      </>
+    );
+  }
   return (
     <>
     <div className="app">
-      <h1>PA2 — Login and Signup</h1>
+      <h1>Projects</h1>
       <div className="tabs">
-        <button
-          className={`signup-login-btn ${showSignup ? 'active' : ''}`}
-          onClick={() => setShowSignup(!showSignup)}
-          aria-pressed={showSignup}
-        >
-          {showSignup ? 'Go to Login' : 'Go to Sign Up'}
-        </button>
-        </div>
-      {showSignup ? <Signup /> : <Login />}
+        <button onClick={() => setView("createProject")}>Create Project</button>
+        <button onClick={() => setLoggedIn(false)}>Logout</button>
       </div>
+      {view ==="createProject" && <CreateProject />}
+    </div>
     </>
-  );
+  )
 }
 
 export default App;

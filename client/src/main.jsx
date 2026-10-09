@@ -2,8 +2,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import Signup from './components/signup.jsx'
-import Login from './components/login.jsx'
+import Signup from './components/Signup.jsx'
+import Login from './components/Login.jsx'
+import CreateProject from './components/CreateProject.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

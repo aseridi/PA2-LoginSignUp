@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../App.css'
 
-function Login() {
+function Login({onLogin}) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
@@ -16,8 +16,12 @@ function Login() {
           body: JSON.stringify({username, password})
         });
         const data = await response.json();
-        setMessage(data.message);
-
+        if(response.ok){
+          onLogin();
+          setMessage("Login successful")
+        } else {
+          setMessage(data.message);
+        }
       } catch (error) {
         setMessage("Could not connect to the server");
       }
