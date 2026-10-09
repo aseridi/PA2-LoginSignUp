@@ -4,6 +4,7 @@ import Login from './components/Login.jsx'
 import CreateProject from './components/CreateProject.jsx'
 import ProjectList from './components/ProjectList.jsx'
 import './App.css'
+import ManageMembers from './components/manageMembers.jsx'
 
 function App() {
   const [showSignup, setShowSignup] = useState(false);
@@ -36,10 +37,12 @@ function App() {
       <div className="tabs">
         <button onClick={() => setView("createProject")}>Create Project</button>
         <button onClick={() => setView("projectList")}>Projects</button>
+        <button onClick={() => setView("membersList")}>Manage Projects</button>
         <button onClick={() => setLoggedIn(false)}>Logout</button>
       </div>
       {view ==="createProject" && <CreateProject />}
       {view ==="projectList" && <ProjectList/>}
+      {view ==="membersList" && <ManageMembers/>}
     </div>
     </>
   )
