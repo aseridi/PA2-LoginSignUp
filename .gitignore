@@ -1,3 +1,4 @@
 node_modules/
 .env
 DataShapes_Contracts.md
+.DS_Store

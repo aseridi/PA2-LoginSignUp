@@ -11,6 +11,7 @@ app.get("/", (req, res) => res.json({ message: "Server is running" }));
 
 app.use("/", require("./routes/users"));
 app.use("/projects", require("./routes/projects"));
+app.use("/projects", require("./routes/stories"));
 
 connectDatabase();
 app.listen(9000, () => console.log("Server running on port 9000"));
