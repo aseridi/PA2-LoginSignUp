@@ -142,9 +142,13 @@ router.delete("/:projectId/members/:userId", async (req, res) => {
         if(!isMember){
             return res.status(404).json({message: "user is not a member of this project"});
         }
-        const isLead = await project.project_lead_id.equals(userObjectId);
+        const isLead = project.project_lead_id.equals(userObjectId);
         if (isLead) {
             return res.status(403).json({message: "Cannot delete project lead"});
+        }
+        const hasStory = await getDb().collection("UserStories").findOne({project_id: projectObjectId, assigned_user_id: userObjectId});
+        if(hasStory){
+            return res.status(409).json({message: "This member still has stories assigned in this project. Reassign, unassign, or delete them first."});
         }
         await memberships.deleteOne({project_id: projectObjectId, user_id: userObjectId});
         return res.status(200).json({message: "member deleted"});

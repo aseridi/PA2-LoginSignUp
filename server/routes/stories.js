@@ -149,6 +149,32 @@ router.get("/:projectId/stories", async (req, res) => {
     }
 });
 
-
+router.delete("/:projectId/stories/:storyId", async (req, res) => {
+    const projectId= req.params.projectId
+    if(!ObjectId.isValid(projectId)) {
+        return res.status(400).json({message: "Invalid project Id"});
+    }
+    const storyId = req.params.storyId
+    if(!ObjectId.isValid(storyId)) {
+        return res.status(400).json({message: "Invalid story id"});
+    }
+    const projectObjectId = new ObjectId(projectId);
+    const storyObjectId = new ObjectId(storyId);
+    try {
+        const db = getDb();
+        const project= await db.collection("projects").findOne({_id: projectObjectId});
+        if (!project) {
+            return res.status(404).json({message: "Project not found"});
+        }
+        const result = await db.collection("UserStories").deleteOne({project_id: projectObjectId, _id: storyObjectId});
+        if (result.deletedCount ===0) {
+            return res.status(404).json({message: "story not found"});
+        }
+        return res.status(200).json({message: "story deleted"});
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({message: "Server error"});
+    }
+});
 
 module.exports = router;
