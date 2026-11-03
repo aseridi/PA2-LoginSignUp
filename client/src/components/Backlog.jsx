@@ -172,8 +172,9 @@ function Backlog() {
                     ))}
                 </select>
             {selectedProjectId && (
-                <>
+                <div className="backlog-layout">
                 <form id="create-project" className="create-story" onSubmit={handleAddStory}>
+                    <h3 className="section-title">New story</h3>
                     <div className="field">
                         <input 
                         className="field_input"
@@ -222,19 +223,29 @@ function Backlog() {
                     <button className="submit-btn" type="submit">Create Story</button>
                 </form>
 
-                <h3>Backlog</h3>
+                <section>
+                <h3 className="section-title">Backlog</h3>
                 {stories.length === 0 ? (
-                <p>No stories yet.</p>
+                <p className="empty-state">No stories yet.</p>
                 ) : (
-                    <ul>
+                    <ul className="story-list">
                         {stories.map(s => (
-                            <li key = {s._id}>
-                                <strong> {s.title}</strong> | {s.priority} | {s.status} | {getMemberName(s.assigned_user_id)}
-                                <button type ="button" onClick={() => setSelectedStory(s._id)}>Details</button>
-                                <button type ="button" onClick={() => handleDeleteStory(s._id)}>Delete</button>
-                                <button type="button" onClick={() => startEdit(s)}>Edit</button>
+                            <li key = {s._id} className={`story-card priority-${String(s.priority).toLowerCase()}`}>
+                                <div className="story-header">
+                                    <strong className="story-title">{s.title}</strong>
+                                    <div className="story-meta">
+                                        <span className={`badge priority-${String(s.priority).toLowerCase()}`}>{s.priority}</span>
+                                        <span className={`badge status-${String(s.status).toLowerCase().replace(" ", "-")}`}>{s.status}</span>
+                                        <span className="assignee">{getMemberName(s.assigned_user_id)}</span>
+                                    </div>
+                                </div>
+                                <div className="story-actions">
+                                    <button type ="button" className="btn btn-secondary" onClick={() => setSelectedStory(s._id)}>Details</button>
+                                    <button type="button" className="btn btn-secondary" onClick={() => startEdit(s)}>Edit</button>
+                                    <button type ="button" className="btn btn-danger" onClick={() => handleDeleteStory(s._id)}>Delete</button>
+                                </div>
                                 {selectedStory === s._id && isEditing && (
-                                    <form onSubmit={handleSaveEdit}>
+                                    <form className="edit-form" onSubmit={handleSaveEdit}>
                                         <div className="field">
                                             <input 
                                             className="field_input"
@@ -286,17 +297,20 @@ function Backlog() {
                                             <option value="Done">Done</option>
                                         </select>
 
-                                        <button type="submit">Save</button>
-                                        <button type="button" onClick={cancelEdit}>Cancel</button>
+                                        <div className="edit-actions">
+                                            <button type="submit" className="btn btn-primary">Save</button>
+                                            <button type="button" className="btn btn-secondary" onClick={cancelEdit}>Cancel</button>
+                                        </div>
                                     </form>
                                 )}
-                                {selectedStory === s._id && <p>{s.description}</p>}
+                                {selectedStory === s._id && <p className="story-description">{s.description}</p>}
                             </li>
                         ))}
                     </ul>
                 )
                 }
-                </>
+                </section>
+                </div>
             )}
             {message && <p className="message">{message}</p>}
             </div>

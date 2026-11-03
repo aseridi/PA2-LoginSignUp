@@ -15,7 +15,7 @@ function App() {
   if (!loggedIn) {
     return (
       <>
-      <div className="app">
+      <div className="app app-auth">
         <h1>PA3 — Projects</h1>
         <div className="tabs">
           <button
@@ -23,7 +23,7 @@ function App() {
             onClick={() => setShowSignup(!showSignup)}
             aria-pressed={showSignup}
           >
-            {showSignup ? 'Go to Login' : 'Go to Singup'}
+            {showSignup ? 'Go to Login' : 'Go to Signup'}
           </button>
           </div>
         {showSignup ? <Signup /> : <Login onLogin={() => setLoggedIn(true)} />}
@@ -33,15 +33,17 @@ function App() {
   }
   return (
     <>
-    <div className="app">
-      <h1>Projects</h1>
-      <div className="tabs">
-        <button onClick={() => setView("createProject")}>Create Project</button>
-        <button onClick={() => setView("projectList")}>Projects</button>
-        <button onClick={() => setView("membersList")}>Manage Projects</button>
-        <button onClick={() => setView("backlog")}> Backlog</button>
-        <button onClick={() => setLoggedIn(false)}>Logout</button>
-      </div>
+    <div className="app app-main">
+      <header className="app-header">
+        <h1>Projects</h1>
+        <nav className="tabs">
+          <button className={view === "createProject" ? "active" : ""} onClick={() => setView("createProject")}>Create Project</button>
+          <button className={view === "projectList" ? "active" : ""} onClick={() => setView("projectList")}>Projects</button>
+          <button className={view === "membersList" ? "active" : ""} onClick={() => setView("membersList")}>Manage Projects</button>
+          <button className={view === "backlog" ? "active" : ""} onClick={() => setView("backlog")}>Backlog</button>
+          <button className="logout-btn" onClick={() => setLoggedIn(false)}>Logout</button>
+        </nav>
+      </header>
       {view ==="createProject" && <CreateProject />}
       {view ==="projectList" && <ProjectList/>}
       {view ==="membersList" && <ManageMembers/>}

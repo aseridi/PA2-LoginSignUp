@@ -117,9 +117,9 @@ function ManageMembers() {
                                     <li key={member._id}>
                                         {member.f_name} {member.l_name} ({member.username})
                                         {isLead ? (
-                                            <span> — Lead</span>
+                                            <span className="lead-tag">Lead</span>
                                         ) : (
-                                            <button type="button" onClick={() => handleRemove(member._id)}>
+                                            <button type="button" className="btn btn-danger" onClick={() => handleRemove(member._id)}>
                                                 Remove
                                             </button>
                                         )}
