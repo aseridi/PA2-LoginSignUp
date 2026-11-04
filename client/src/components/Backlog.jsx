@@ -290,7 +290,7 @@ function Backlog() {
                                         <button type="button" onClick={cancelEdit}>Cancel</button>
                                     </form>
                                 )}
-                                {selectedStory === s._id && <p>{s.description}</p>}
+                                {selectedStory === s._id && !isEditing && <p>{s.description}</p>}
                             </li>
                         ))}
                     </ul>
